@@ -1,0 +1,85 @@
+SELECT   r.emailid,
+d.firstname,
+d.lastname,
+d.mobileno,
+mu.usertype,
+mc.countryname,
+ms.statename,
+d.city,
+r.createdon,
+r.updatedon,
+GROUP_CONCAT(ml.language),
+GROUP_CONCAT(concat(e.noofyears,',',e.company_name,',',e.jobdescription) separator'|')
+FROM 
+employee_registration.user_register as r 
+left join employee_registration.user_details as d on r.userid=d.userid
+left join employee_registration.user_experiences as e on r.userid=e.userid
+left join employee_registration.user_language as l on r.userid=l.userid
+left join employee_registration.master_language as ml on l.languageid=ml.languageid
+left join employee_registration.master_country as mc on d.countryid=mc.countryid
+left join employee_registration.master_state as ms on d.stateid=ms.stateid
+left join employee_registration.master_usertype as mu on d.usertypeid=mu.usertypeid
+where r.userid=1
+group by r.emailid,
+d.firstname,
+d.lastname,
+d.mobileno,
+d.usertypeid,
+d.countryid,
+d.stateid,
+d.city,
+r.createdon,
+r.updatedon;
+
+
+
+
+-----------------------------------------------------------------------
+SELECT   r.emailid,
+d.firstname,
+d.lastname,
+d.mobileno,
+mu.usertype,
+mc.countryname,
+ms.statename,
+d.city,
+r.createdon,
+r.updatedon,
+GROUP_CONCAT(ml.language),
+GROUP_CONCAT(concat(e.noofyears,',',e.company_name,',',e.jobdescription) separator'|')
+FROM 
+employee_registration.user_register as r 
+left join employee_registration.user_details as d on r.userid=d.userid
+left join employee_registration.user_experiences as e on r.userid=e.userid
+left join employee_registration.user_language as l on r.userid=l.userid
+left join employee_registration.master_language as ml on l.languageid=ml.languageid
+left join employee_registration.master_country as mc on d.countryid=mc.countryid
+left join employee_registration.master_state as ms on d.stateid=ms.stateid
+left join employee_registration.master_usertype as mu on d.usertypeid=mu.usertypeid
+where r.userid=1
+group by r.emailid,
+d.firstname,
+d.lastname,
+d.mobileno,
+mu.usertype,
+mc.countryname,
+ms.statename,
+d.city,
+r.createdon,
+r.updatedon;
+
+
+-------------------------final----------------------------------------
+SELECT  r.emailid,d.firstname,d.lastname,d.mobileno,mu.usertype,mc.countryname,ms.statename,d.city,
+r.createdon,r.updatedon,GROUP_CONCAT(DISTINCT ml.language),
+GROUP_CONCAT(distinct  concat('{noOfYear:',e.noofyears,',company:',e.company_name,',des:',e.jobdescription,'}') separator',')
+FROM employee_registration.user_register as r 
+left join employee_registration.user_details as d on r.userid=d.userid
+left join employee_registration.user_experiences as e on r.userid=e.userid
+left join employee_registration.user_language as l on r.userid=l.userid
+left join employee_registration.master_language as ml on l.languageid=ml.languageid
+left join employee_registration.master_country as mc on d.countryid=mc.countryid
+left join employee_registration.master_state as ms on d.stateid=ms.stateid
+left join employee_registration.master_usertype as mu on d.usertypeid=mu.usertypeid
+where r.userid=8
+group by r.emailid,d.firstname,d.lastname,d.mobileno,mu.usertype,mc.countryname,ms.statename,d.city;

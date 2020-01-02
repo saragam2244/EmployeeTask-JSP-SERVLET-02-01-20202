@@ -1,0 +1,40 @@
+.checkbox {
+    padding-left: 10PX !important;
+}
+
+.modal-title {
+    margin-left: 30%;
+    margin-right: 30%;
+}
+#update, #view, #delete{
+	margin-right: 10px;
+	
+}
+
+/* ---image  */
+.btn-file {
+    position: relative;
+    overflow: hidden;
+}
+.btn-file input[type=file] {
+    position: absolute;
+    top: 0;
+    right: 0;
+    min-width: 10%;
+    min-height: 10%;
+    font-size: 100px;
+    text-align: right;
+    filter: alpha(opacity=0);
+    opacity: 0;
+    outline: none;
+    background: white;
+    cursor: inherit;
+    display: block;
+}
+
+#img-upload{
+    width: 15%;
+}
+.custemLabale{
+	color: red;
+}

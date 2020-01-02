@@ -1,0 +1,33 @@
+CREATE DEFINER=`root`@`localhost` PROCEDURE `updateEmployee`(
+in id int,
+IN email VARCHAR(255),
+IN pwd VARCHAR(255),
+IN updatedon datetime,
+IN fname VARCHAR(255),
+IN lname VARCHAR(255),
+IN contact varchar(14),
+IN country int(4),
+IN state int(4),
+IN city VARCHAR(255),
+IN userType int(4))
+BEGIN
+    UPDATE `employee_registration`.`user_register`
+	SET
+	`emailid` = email,
+	`password` = pwd,
+	`updatedon` = updatedon
+	WHERE `userid` = id;
+    
+    UPDATE `employee_registration`.`user_details`
+	SET
+	`firstname` = fname,
+	`lastname` =lname,
+	`mobileno` = contact,
+	`countryid` = country,
+	`stateid` = state,
+	`city` =	city,
+	`usertypeid` = userType
+	WHERE `userid` = id;
+
+    commit;
+END

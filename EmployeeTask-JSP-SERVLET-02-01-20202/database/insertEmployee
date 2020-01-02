@@ -1,0 +1,30 @@
+CREATE DEFINER=`root`@`localhost` PROCEDURE `insertEmployee`(
+IN email VARCHAR(255),
+IN pwd VARCHAR(255),
+IN createdon datetime,
+IN updatedon datetime,
+IN fname VARCHAR(255),
+IN lname VARCHAR(255),
+IN contact varchar(14),
+IN country int(4),
+IN state int(4),
+IN city VARCHAR(255),
+IN userType int(4),	
+OUT massege varchar(256))
+BEGIN
+	DECLARE countEmployee INT DEFAULT 0;
+	INSERT INTO `employee_registration`.`user_register`
+	(`emailid`,`password`,`createdon`,`updatedon`)
+	VALUES
+	(email,pwd,createdon,updatedon);
+    
+    select max(userid) into countEmployee from `employee_registration`.`user_register`;
+    
+    INSERT INTO `employee_registration`.`user_details`
+	(`userid`,`firstname`,`lastname`,`mobileno`,`countryid`,`stateid`,`city`,`usertypeid`,`profileimg`)
+	VALUES
+	(countEmployee,fname,lname,contact,country,state,city,userType," ");
+    
+    set massege=countEmployee;
+    commit;
+END
